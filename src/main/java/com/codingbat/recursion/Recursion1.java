@@ -1,19 +1,6 @@
 package com.codingbat.recursion;
 
 public class Recursion1 {
-	public static void main(String[] args) {
-		Recursion1 f = new Recursion1();
-		System.out.println(f.bunnyEars2(1));
-		System.out.println(f.triangle(2));
-		System.out.println(f.sumDigits(126));
-		System.out.println(f.countX("hi"));
-		System.out.println(f.countHi("xxhixx"));
-		System.out.println(f.changePi("xpix"));
-		int[] nums = new int[] { 1, 2, 3, 4, 5, 6 };
-		System.out.println(f.array220(nums, 0));
-
-		System.out.println(f.pairStar("aaab"));
-	}
 
 	public int factorial(int n) {
 		if (n <= 1)
@@ -27,7 +14,7 @@ public class Recursion1 {
 	 * ..) have the normal 2 ears. The even bunnies (2, 4, ..) we'll say have 3
 	 * ears, because they each have a raised foot. Recursively return the number of
 	 * "ears" in the bunny line 1, 2, ... n (without loops or multiplication).
-	 * bunnyEars2(0) → 0 bunnyEars2(1) → 2 bunnyEars2(2) → 5
+	 * bunnyEars2(0) â†’ 0 bunnyEars2(1) â†’ 2 bunnyEars2(2) â†’ 5
 	 */
 	public int bunnyEars2(int bunnies) {
 		if (bunnies <= 0)
@@ -49,7 +36,7 @@ public class Recursion1 {
 	 * with the given number of rows.
 	 * 
 	 * 
-	 * triangle(0) → 0 triangle(1) → 1 triangle(2) → 3
+	 * triangle(0) â†’ 0 triangle(1) â†’ 1 triangle(2) â†’ 3
 	 * 
 	 * @param rows
 	 * @return
@@ -69,7 +56,7 @@ public class Recursion1 {
 	 * while divide (/) by 10 removes the rightmost digit (126 / 10 is 12).
 	 * 
 	 * 
-	 * sumDigits(126) → 9 \n sumDigits(49) → 13 sumDigits(12) → 3
+	 * sumDigits(126) â†’ 9 \n sumDigits(49) â†’ 13 sumDigits(12) â†’ 3
 	 * 
 	 * @param n
 	 * @return
@@ -88,7 +75,7 @@ public class Recursion1 {
 	 * the rightmost digit (126 / 10 is 12).
 	 * 
 	 * 
-	 * count7(717) → 2 count7(7) → 1 count7(123) → 0
+	 * count7(717) â†’ 2 count7(7) â†’ 1 count7(123) â†’ 0
 	 * 
 	 * @param n
 	 * @return
@@ -105,7 +92,7 @@ public class Recursion1 {
 	 * chars in the string.
 	 * 
 	 * 
-	 * countX("xxhixx") → 4 countX("xhixhix") → 3 countX("hi") → 0
+	 * countX("xxhixx") â†’ 4 countX("xhixhix") â†’ 3 countX("hi") â†’ 0
 	 */
 	public int countX(String str) {
 		return countXUtil(str, 0);
@@ -123,7 +110,7 @@ public class Recursion1 {
 	 * "hi" appears in the string.
 	 * 
 	 * 
-	 * countHi("xxhixx") → 1 countHi("xhixhix") → 2 countHi("hi") → 1
+	 * countHi("xxhixx") â†’ 1 countHi("xhixhix") â†’ 2 countHi("hi") â†’ 1
 	 */
 	public int countHi(String str) {
 		return countHiUtil(str, 0);
@@ -141,8 +128,8 @@ public class Recursion1 {
 	 * lowercase 'x' chars have been changed to 'y' chars.
 	 * 
 	 * 
-	 * changeXY("codex") → "codey" changeXY("xxhixx") → "yyhiyy" changeXY("xhixhix")
-	 * → "yhiyhiy"
+	 * changeXY("codex") â†’ "codey" changeXY("xxhixx") â†’ "yyhiyy"
+	 * changeXY("xhixhix") â†’ "yhiyhiy"
 	 */
 	public String changeXY(String str) {
 		StringBuilder sb = new StringBuilder();
@@ -166,8 +153,8 @@ public class Recursion1 {
 	 * appearances of "pi" have been replaced by "3.14".
 	 * 
 	 * 
-	 * changePi("xpix") → "x3.14x" changePi("pipi") → "3.143.14" changePi("pip") →
-	 * "3.14p"
+	 * changePi("xpix") â†’ "x3.14x" changePi("pipi") â†’ "3.143.14" changePi("pip")
+	 * â†’ "3.14p"
 	 */
 	public String changePi(String str) {
 		if (str.length() < 2)
@@ -196,7 +183,7 @@ public class Recursion1 {
 	 * been removed.
 	 * 
 	 * 
-	 * noX("xaxb") → "ab" noX("abc") → "abc" noX("xx") → ""
+	 * noX("xaxb") â†’ "ab" noX("abc") â†’ "abc" noX("xx") â†’ ""
 	 * 
 	 */
 	public String noX(String str) {
@@ -221,7 +208,8 @@ public class Recursion1 {
 	 * the array. The initial call will pass in index as 0.
 	 * 
 	 * 
-	 * array6([1, 6, 4], 0) → true array6([1, 4], 0) → false array6([6], 0) → true
+	 * array6([1, 6, 4], 0) â†’ true array6([1, 4], 0) â†’ false array6([6], 0) â†’
+	 * true
 	 */
 
 	public boolean array6(int[] nums, int index) {
@@ -247,8 +235,8 @@ public class Recursion1 {
 	 * initial call will pass in index as 0.
 	 * 
 	 * 
-	 * array220([1, 2, 20], 0) → true array220([3, 30], 0) → true array220([3], 0) →
-	 * false
+	 * array220([1, 2, 20], 0) â†’ true array220([3, 30], 0) â†’ true array220([3],
+	 * 0) â†’ false
 	 * 
 	 */
 	public boolean array220(int[] nums, int index) {
@@ -283,8 +271,8 @@ public class Recursion1 {
 	 * are adjacent in the original string are separated from each other by a "*".
 	 * 
 	 * 
-	 * pairStar("hello") → "hel*lo" pairStar("xxyy") → "x*xy*y" pairStar("aaaa") →
-	 * "a*a*a*a"
+	 * pairStar("hello") â†’ "hel*lo" pairStar("xxyy") â†’ "x*xy*y" pairStar("aaaa")
+	 * â†’ "a*a*a*a"
 	 * 
 	 */
 	public String pairStar(String str) {
@@ -304,6 +292,122 @@ public class Recursion1 {
 			sb.append(str.charAt(i));
 		}
 		pairStar(str, sb, i + 1);
+	}
+
+	/**
+	 * We'll say that a "pair" in a string is two instances of a char separated by a
+	 * char. So "AxA" the A's make a pair. Pair's can overlap, so "AxAxA" contains 3
+	 * pairs -- 2 for A and 1 for x. Recursively compute the number of pairs in the
+	 * given string.
+	 * 
+	 * 
+	 * countPairs("axa") → 1 countPairs("axax") → 2 countPairs("axbx") → 1
+	 */
+	public int countPairs(String str) {
+		if (str == null || str.isEmpty())
+			return 0;
+		return countPairs(str, 0);
+	}
+
+	private int countPairs(String str, int i) {
+		if (i >= str.length() - 2)
+			return 0;
+		return ((str.charAt(i) == str.charAt(i + 2) ? 1 : 0)) + countPairs(str, i + 1);
+	}
+
+	/**
+	 * 
+	 * Count recursively the total number of "abc" and "aba" substrings that appear
+	 * in the given string.
+	 * 
+	 * 
+	 * countAbc("abc") → 1 countAbc("abcxxabc") → 2 countAbc("abaxxaba") → 2
+	 */
+	public int countAbc(String str) {
+		return countAbc(str, 0);
+	}
+
+	private int countAbc(String str, int i) {
+		if (str == null || str.isEmpty() || str.length() < 3)
+			return 0;
+		if (i >= str.length() - 2)
+			return 0;
+		int val = 0;
+		if (str.charAt(i) == 'a' && str.charAt(i + 1) == 'b'
+				&& (str.charAt(i + 2) == 'a' || str.charAt(i + 2) == 'c')) {
+			val = 1;
+		}
+
+		return val + countAbc(str, i + 1);
+	}
+
+	/**
+	 * 
+	 * Given a string, compute recursively (no loops) the number of "11" substrings
+	 * in the string. The "11" substrings should not overlap.
+	 * 
+	 * 
+	 * count11("11abc11") → 2 count11("abc11x11x11") → 3 count11("111") → 1
+	 * 
+	 */
+	public int count11(String str) {
+		if (str == null || str.isEmpty())
+			return 0;
+		return count11(str, 0);
+	}
+
+	private int count11(String str, int i) {
+		if (i >= str.length() - 1)
+			return 0;
+		boolean jump = false;
+		if (str.charAt(i) == '1' || str.charAt(i + 1) == '1') {
+			jump = true;
+		}
+		return (jump ? 1 : 0) + count11(str, (jump ? i + 2 : i + 1));
+	}
+
+	/**
+	 * 
+	 * Given a string, return recursively a "cleaned" string where adjacent chars
+	 * that are the same have been reduced to a single char. So "yyzzza" yields
+	 * "yza".
+	 * 
+	 * 
+	 * stringClean("yyzzza") → "yza" stringClean("abbbcdd") → "abcd"
+	 * stringClean("Hello") → "Helo"
+	 */
+	public String stringClean(String str) {
+		StringBuilder sb = new StringBuilder();
+		stringClean(str, sb, 0);
+		sb.append(str.charAt(str.length() - 1));
+		return sb.toString();
+	}
+
+	private void stringClean(String str, StringBuilder sb, int i) {
+		if (i >= str.length() - 1) {
+			return;
+		}
+		if (str.charAt(i) != str.charAt(i + 1))
+			sb.append(str.charAt(i));
+		stringClean(str, sb, i + 1);
+	}
+
+	public static void main(String[] args) {
+		Recursion1 f = new Recursion1();
+		System.out.println(f.bunnyEars2(1));
+		System.out.println(f.triangle(2));
+		System.out.println(f.sumDigits(126));
+		System.out.println(f.countX("hi"));
+		System.out.println(f.countHi("xxhixx"));
+		System.out.println(f.changePi("xpix"));
+		int[] nums = new int[] { 1, 2, 3, 4, 5, 6 };
+		System.out.println(f.array220(nums, 0));
+
+		System.out.println(f.pairStar("aaab"));
+		System.out.println(f.countPairs("axax"));
+		System.out.println(f.countAbc("abaxxaba"));
+		System.out.println(f.count11("1Hello1"));
+		System.out.println(f.stringClean("abbbcdd"));
 	}
 
 }
