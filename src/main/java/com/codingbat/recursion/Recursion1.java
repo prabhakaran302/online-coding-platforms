@@ -1,8 +1,8 @@
-package com.leetcode.recursion;
+package com.codingbat.recursion;
 
-public class BunnyEars {
+public class Recursion1 {
 	public static void main(String[] args) {
-		BunnyEars f = new BunnyEars();
+		Recursion1 f = new Recursion1();
 		System.out.println(f.bunnyEars2(1));
 		System.out.println(f.triangle(2));
 		System.out.println(f.sumDigits(126));
@@ -11,6 +11,14 @@ public class BunnyEars {
 		System.out.println(f.changePi("xpix"));
 		int[] nums = new int[] { 1, 2, 3, 4, 5, 6 };
 		System.out.println(f.array220(nums, 0));
+
+		System.out.println(f.pairStar("aaab"));
+	}
+
+	public int factorial(int n) {
+		if (n <= 1)
+			return 1;
+		return n * factorial(n - 1);
 	}
 
 	/**
@@ -268,4 +276,34 @@ public class BunnyEars {
 		sb.append("*");
 		allStar(str, sb, i + 1);
 	}
+
+	/**
+	 * 
+	 * Given a string, compute recursively a new string where identical chars that
+	 * are adjacent in the original string are separated from each other by a "*".
+	 * 
+	 * 
+	 * pairStar("hello") → "hel*lo" pairStar("xxyy") → "x*xy*y" pairStar("aaaa") →
+	 * "a*a*a*a"
+	 * 
+	 */
+	public String pairStar(String str) {
+		if (str == null || str.isEmpty())
+			return str;
+		StringBuilder sb = new StringBuilder();
+		pairStar(str, sb, 0);
+		return sb.append(str.charAt(str.length() - 1)).toString();
+	}
+
+	private void pairStar(String str, StringBuilder sb, int i) {
+		if (i > str.length() - 2)
+			return;
+		if (str.charAt(i) == str.charAt(i + 1)) {
+			sb.append(str.charAt(i)).append("*");
+		} else {
+			sb.append(str.charAt(i));
+		}
+		pairStar(str, sb, i + 1);
+	}
+
 }
