@@ -3,9 +3,20 @@ package com.codezen.recursion;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class Recursion {
+
+	static class RecusrsionUtil {
+		static int floorValue = -1;
+		static int maxOnesCount = 1;
+
+		static String temp_dictionary[] = new String[] { "mobile", "big", "samsung", "sam", "sung", "man", "mango", "icecream",
+				"and", "go", "i", "like", "ice", "cream", "am" };
+		static Set<String> dictionary = new HashSet<String>();
+	}
 
 	public static void main(String[] args) {
 		printSequence(1);
@@ -14,6 +25,85 @@ public class Recursion {
 
 		int M[][] = { { 0, 0, 1, 1, 0 }, { 1, 0, 1, 1, 0 }, { 0, 1, 0, 0, 0 }, { 0, 0, 0, 0, 1 } };
 		System.out.println(getMaxOnes(M));
+
+		int A[] = new int[] { 3, 2, 1 };
+		System.out.println("Max Inversion " + solve(A, A.length));
+
+		A = new int[] { 10, 20, 30, 40, 50 };
+		System.out.println("Floor Value " + findFloor(A, 25));
+
+		for (String word : RecusrsionUtil.temp_dictionary) {
+			RecusrsionUtil.dictionary.add(word);
+		}
+
+		System.out.println(wordBreak("iambig"));
+		System.out.println(wordBreak("iiiiiiii"));
+		System.out.println(wordBreak(""));
+		System.out.println(wordBreak("ilikelikeimangoiiisamsamsung"));
+		System.out.println(wordBreak("samsungandmango"));
+		System.out.println(wordBreak("samsungandmangok"));
+	}
+
+	/**
+	 * Given an input string and a dictionary of words, find out if the input string
+	 * can be segmented into a space-separated sequence of dictionary words.
+	 * 
+	 * @param word
+	 * @return
+	 */
+	private static boolean wordBreak(String word) {
+		System.out.print("Possible to break Word " + word + " >> ");
+		return wordBreakUtil(word, word.length());
+	}
+
+	private static boolean wordBreakUtil(String word, int length) {
+		if (length == 0)
+			return true;
+		
+		if(RecusrsionUtil.dictionary.contains(word))
+			return true;
+
+		for (int i = 1; i <= length; i++) {
+			String prefix = word.substring(0, i);
+			String suffix = word.substring(i, length);
+			boolean dictWord = RecusrsionUtil.dictionary.contains(prefix);
+			boolean wordBreakFlag = wordBreakUtil(suffix, suffix.length());
+			if (dictWord && wordBreakFlag)
+				return true;
+		}
+		return false;
+	}
+
+	/**
+	 * Given a sorted array A and an integer x, floor value of x is the largest
+	 * element in the array which is smaller than or equal to x. You need to write
+	 * an efficient function to find floor value of x.
+	 * 
+	 * @param array
+	 * @param element
+	 * @return
+	 */
+	public static int findFloor(int[] array, int element) {
+		findFloorUtil(array, 0, array.length - 1, element);
+		return RecusrsionUtil.floorValue;
+	}
+
+	private static void findFloorUtil(int[] array, int low, int high, int element) {
+		if (low < high) {
+			int mid = (low + high) / 2;
+
+			if (array[mid] == element)
+				RecusrsionUtil.floorValue = array[mid];
+
+			if (array[mid] < element && mid != high && array[mid + 1] > element)
+				RecusrsionUtil.floorValue = array[mid];
+
+			if (array[mid] > element) {
+				findFloorUtil(array, low, mid, element);
+			} else if (array[mid] < element) {
+				findFloorUtil(array, mid + 1, high, element);
+			}
+		}
 	}
 
 	/**
@@ -26,13 +116,43 @@ public class Recursion {
 	 * @param n
 	 * @return
 	 */
-	long solve(int[] A, int n) {
-		int result = 1;
-		
-		return result;
+	public static long solve(int[] A, int n) {
+		return solveUtil(A, 0, n - 1);
 	}
 
-	static int maxOnesCount = 1;
+	private static long solveUtil(int[] a, int low, int high) {
+		int count = 0;
+		if (low < high) {
+			int mid = (low + high) / 2;
+			count += solveUtil(a, low, mid);
+			count += solveUtil(a, mid + 1, high);
+			count += megreSolveUtil(a, low, mid, high);
+
+		}
+		return count;
+	}
+
+	private static int megreSolveUtil(int[] a, int low, int mid, int high) {
+		int[] left = Arrays.copyOfRange(a, low, mid + 1);
+		int[] right = Arrays.copyOfRange(a, mid + 1, high + 1);
+		int swaps = 0;
+		int i = 0, j = 0, k = low;
+		while (i < left.length && j < right.length) {
+			if (left[i] <= right[j]) {
+				a[k++] = left[i++];
+			} else {
+				a[k++] = right[j++];
+				swaps += (mid + 1) - (low + i);
+			}
+		}
+		while (i < left.length)
+			a[k++] = left[i++];
+
+		while (j < right.length)
+			a[k++] = right[j++];
+
+		return swaps;
+	}
 
 	/**
 	 * Given a n*m matrix, find and print the number of cells in the largest region
@@ -50,9 +170,9 @@ public class Recursion {
 		for (int i = 0; i < row; i++) {
 			for (int j = 0; j < col; j++) {
 				if (inputMatrix[i][j] == 1 && !visited[i][j]) {
-					maxOnesCount = 1;
+					RecusrsionUtil.maxOnesCount = 1;
 					DFS(inputMatrix, i, j, visited);
-					result = Math.max(maxOnesCount, result);
+					result = Math.max(RecusrsionUtil.maxOnesCount, result);
 				}
 			}
 		}
@@ -66,7 +186,7 @@ public class Recursion {
 		visited[row][col] = true;
 		for (int k = 0; k < rowsC.length; k++) {
 			if (isSafe(inputMatrix, visited, row + rowsC[k], col + colC[k])) {
-				maxOnesCount++;
+				RecusrsionUtil.maxOnesCount++;
 				DFS(inputMatrix, row + rowsC[k], col + colC[k], visited);
 			}
 		}
