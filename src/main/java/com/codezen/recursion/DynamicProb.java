@@ -35,7 +35,7 @@ public class DynamicProb {
 		System.out.println("Problem " + ++problemCount + " Name: >>  Minimum Steps to reach 1 from " + n + " is >> "
 				+ countStepsTo1(n));
 
-		n = 10;
+		n = 5;
 		System.out.println("Problem " + ++problemCount + " Name: >>  No of ways to climb stairs of steps " + n
 				+ " is >> " + staircase(n));
 
@@ -51,7 +51,20 @@ public class DynamicProb {
 	 * @return
 	 */
 	public static int staircase(int n) {
-		return 0;
+		if (n == 0)
+			return 1;
+		int first = 1;
+		int second = 2;
+		int third = 4;
+		int sum = 0;
+		for (int i = 4; i <= n; i++) {
+			sum = first + second + third;
+			int tempS = third;
+			third = sum;
+			first = second;
+			second = tempS;
+		}
+		return sum;
 	}
 
 	/**
