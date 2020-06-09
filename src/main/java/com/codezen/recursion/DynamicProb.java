@@ -1,44 +1,137 @@
 package com.codezen.recursion;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class DynamicProb {
 	public static void main(String[] args) {
 		int problemCount = 0;
 
 		String s1 = "abc";
 		String s2 = "dc";
-		System.out.println("Problem " + ++problemCount + " Name: >>  Edit Minimum Distance (  " + s1 + " , " + s2
+		System.out.println("Problem " + ++problemCount + "   Name: >>  Edit Minimum Distance (  " + s1 + " , " + s2
 				+ " ) is " + editDistance(s1, s2));
 
 		int[] weight = new int[] { 10, 20, 30 };
 		int[] value = new int[] { 60, 100, 120 };
 		int maxWeight = 50;
 		System.out.println("Problem " + ++problemCount
-				+ " Name: >>  Knapsack Max weight  ************ (Codezen Some cases fails) ************ "
+				+ "   Name: >>  Knapsack Max weight  ************ (Codezen Some cases fails) ************ "
 				+ knapsack(weight, value, maxWeight));
 
 		value = new int[] { 1, 4, 3, 4 };
-		System.out.println("Problem " + ++problemCount + " Name: >>  Max Subsegment if one change allowed "
+		System.out.println("Problem " + ++problemCount + "   Name: >>  Max Subsegment if one change allowed "
 				+ solve(value, value.length));
 
 		value = new int[] { 10, 15, 20, 25 };
 		System.out.println("Problem " + ++problemCount
-				+ " Name: >>  Cost of Matrix Multiplication  ************ (Pending)  ************ " + mcm(value));
+				+ "   Name: >>  Cost of Matrix Multiplication  ************ (Pending)  ************ " + mcm(value));
 
-		System.out.println("Problem " + ++problemCount + " Name: >>  No. of ways to paint fence " + paintFences(3));
+		System.out.println("Problem " + ++problemCount + "   Name: >>  No. of ways to paint fence " + paintFences(3));
 
 		s1 = "adebc";
 		s2 = "dcadb";
 		System.out.println(
-				"Problem " + ++problemCount + " Name: >>  LCS (  " + s1 + " , " + s2 + "  ) is " + lcs(s1, s2));
+				"Problem " + ++problemCount + "   Name: >>  LCS (  " + s1 + " , " + s2 + "  ) is " + lcs(s1, s2));
 
 		int n = 10;
-		System.out.println("Problem " + ++problemCount + " Name: >>  Minimum Steps to reach 1 from " + n + " is >> "
+		System.out.println("Problem " + ++problemCount + "   Name: >>  Minimum Steps to reach 1 from " + n + " is >> "
 				+ countStepsTo1(n));
 
 		n = 5;
-		System.out.println("Problem " + ++problemCount + " Name: >>  No of ways to climb stairs of steps " + n
+		System.out.println("Problem " + ++problemCount + "   Name: >>  No of ways to climb stairs of steps " + n
 				+ " is >> " + staircase(n));
 
+		List<Integer> list = DynamicProbUtil.getList();
+		System.out.println("Problem " + ++problemCount + "   Name: >>  Length of Longest Bitonic Subsequence is  "
+				+ longestBitonicSubsequenceLength(list));
+
+		value = new int[] { 2, 5, 3, 7, 11, 8, 10, 13, 6 };
+		list = new ArrayList<Integer>();
+		for (int i : value)
+			list.add(i);
+		System.out.println(
+				"Problem " + ++problemCount + "  Name: >>  LIS(NLOGN) is  " + longestIncreasingSubSequence(list));
+
+	}
+
+	public static int longestIncreasingSubSequence(List<Integer> list) {
+		int dp[] = new int[list.size()];
+		int len = 1;
+		dp[0] = list.get(0);
+		for (int i = 1; i < list.size(); i++) {
+			if (list.get(i) < dp[0]) {
+				dp[0] = list.get(i);
+			} else if (list.get(len - 1) < list.get(i)) {
+				dp[len++] = list.get(i);
+			} else {
+				dp[findIndex(dp, len - 1, list.get(i))] = list.get(i);
+			}
+		}
+		return len;
+	}
+
+	private static int findIndex(int[] dp, int index, int val) {
+		int l = -1;
+		int r = index;
+		while (l + 1 < r) {
+			int m = l + (r - l) / 2;
+			if (dp[m] >= val) {
+				r = m;
+			} else {
+				l = m;
+			}
+		}
+		return r;
+	}
+
+	/**
+	 * Longest Bitonic Subsequence
+	 * 
+	 * @param A
+	 * @return
+	 */
+	public static int longestBitonicSubsequenceLength(final List<Integer> A) {
+		int res = 0;
+		int[] lisLeft = new int[A.size()];
+		int[] lisRight = new int[A.size()];
+
+		findLIS(A, lisLeft);
+		findLISRightArray(A, lisRight);
+
+		for (int i = 0; i < lisLeft.length; i++) {
+			res = Math.max(res, lisLeft[i] + lisRight[i] - 1);
+		}
+		return res;
+	}
+
+	/**
+	 * LIS in O(n^2)
+	 * 
+	 * @param a
+	 * @param lisLeft
+	 */
+	private static void findLIS(List<Integer> a, int[] lisLeft) {
+		Arrays.fill(lisLeft, 1);
+		for (int i = 1; i < a.size(); i++) {
+			for (int j = 0; j <= i; j++) {
+				if (a.get(i) > a.get(j)) {
+					lisLeft[i] = Math.max(lisLeft[j] + 1, lisLeft[i]);
+				}
+			}
+		}
+	}
+
+	private static void findLISRightArray(List<Integer> a, int[] lisRight) {
+		Arrays.fill(lisRight, 1);
+		for (int i = a.size() - 2; i >= 0; i--) {
+			for (int j = a.size() - 1; j >= i; j--) {
+				if (a.get(i) > a.get(j)) {
+					lisRight[i] = Math.max(lisRight[j] + 1, lisRight[i]);
+				}
+			}
+		}
 	}
 
 	/**
@@ -267,6 +360,16 @@ public class DynamicProb {
 					System.out.print(dp[i][j] + " ");
 				}
 			}
+		}
+
+		public static List<Integer> getList() {
+			int[] array = new int[] { 1, 3, 5, 6, 4, 8, 4, 3, 2, 1 };
+			List<Integer> list = new ArrayList<Integer>();
+			for (int i : array) {
+				list.add(i);
+			}
+
+			return list;
 		}
 	}
 }
