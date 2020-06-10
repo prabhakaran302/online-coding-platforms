@@ -23,7 +23,7 @@ public class LargeSumNonConsecutive {
 		int exc = 0;
 		for (int i = 1; i < nums.length; i++) {
 			if (nums[i] >= 0) {
-				int temp = inc;
+				int temp = Math.max(inc, exc);
 				inc = Math.max(exc + nums[i], inc);
 				exc = temp;
 			} else {
