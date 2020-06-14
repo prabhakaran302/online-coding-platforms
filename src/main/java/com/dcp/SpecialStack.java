@@ -66,12 +66,18 @@ public class SpecialStack {
 	}
 
 	public void push(int ele) {
-		if (max > ele)
+		if (stack.isEmpty()) {
 			stack.push(ele);
-		else {
-			stack.push(2 * max - ele);
 			max = ele;
+		} else {
+			if (ele < max)
+				stack.push(ele);
+			else {
+				stack.push(2 * ele - max);
+				max = ele;
+			}
 		}
+
 	}
 
 	public int pop() throws Exception {
@@ -81,10 +87,10 @@ public class SpecialStack {
 		int ele = stack.pop();
 		int temp = 0;
 		if (ele < max) {
-			temp = max;
-			max = 2 * ele + 1;
-		} else {
 			temp = ele;
+		} else {
+			temp = max;
+			max = 2 * max - ele;
 		}
 		return temp;
 	}

@@ -66,10 +66,12 @@ public class WordBreakProblem {
 
 	public static void main(String[] args) {
 		List<String> wordDict = new ArrayList<String>();
-		wordDict.add("leet");
-		wordDict.add("code");
+		wordDict.add("cat");
+		wordDict.add("sand");
+		wordDict.add("and");
+		wordDict.add("dog");
 
-		String s = "leetcode";
+		String s = "catsanddog";
 
 		WordBreakProblem obj = new WordBreakProblem();
 		obj.wordBreakIterative(s, wordDict);
