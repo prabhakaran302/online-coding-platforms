@@ -3,6 +3,12 @@ package com.practice.medium;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * https://leetcode.com/problems/find-all-anagrams-in-a-string/
+ * 
+ * @author prabhakaran.nivanil
+ *
+ */
 public class FindAllAnagramsInString {
 	public List<Integer> findAnagrams(String s, String p) {
 		List<Integer> list = new ArrayList<Integer>();
@@ -29,6 +35,9 @@ public class FindAllAnagramsInString {
 			sArray[s.charAt(i - pL)]--;
 		}
 
+		/**
+		 * last values not included in previous loop
+		 */
 		if (compare(sArray, pArray)) {
 			list.add(sL - pL);
 		}
