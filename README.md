@@ -33,7 +33,7 @@ This Repository contains solution from famous online coding learning platforms l
   </tr>
   
    <tr>
-    <td>1</td>
+    <td>2</td>
     <td>Given an array nums of n integers, are there elements a, b, c in nums such that a + b + c = 0? Find all unique triplets in the array which gives the sum of zero.</td>
     <td>https://leetcode.com/problems/3sum/</td>
     <td>shorturl.at/euzO2</td>
