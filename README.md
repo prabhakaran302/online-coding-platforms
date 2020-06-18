@@ -9,7 +9,7 @@ This Repository contains solution from famous online coding learning platforms l
   </tr>
   <tr>
     <td>Medium</td>
-    <td>1</td>
+    <td>2</td>
   </tr>
   <tr>
     <td>Hard</td>
