@@ -42,3 +42,20 @@ This Repository contains solution from famous online coding learning platforms l
   
   
 </Table>
+
+<H1>Leetcode 30-Day Challenge</H1>
+
+<Table>
+  <tr>
+    <td>Easy</td>
+    <td>10</td>
+  </tr>
+  <tr>
+    <td>Medium</td>
+    <td>13</td>
+  </tr>
+  <tr>
+    <td>Hard</td>
+    <td>1</td>
+  </tr>
+</Table>
