@@ -11,6 +11,7 @@ import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.Stack;
 
+import com.practice.easy.util.ListNode;
 import com.practice.easy.util.TreeNode;
 import com.practice.easy.util.Utils;
 
@@ -103,6 +104,18 @@ public class ThirtyDaysProblems {
 		char[][] matrix = new char[][] { { '1' } };
 		System.out.println(obj.maximalSquare(matrix));
 		System.out.println("\n***************************\n");
+	}
+
+	public ListNode middleNode(ListNode head) {
+		ListNode fast = head;
+		ListNode slow = head;
+
+		while (fast != null && fast.next != null) {
+			fast = fast.next.next;
+			slow = slow.next;
+		}
+
+		return slow;
 	}
 
 	/**
