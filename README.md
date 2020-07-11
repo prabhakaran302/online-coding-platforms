@@ -5,15 +5,15 @@ This Repository contains solution from famous online coding learning platforms l
 <Table>
   <tr>
     <td>Easy</td>
-    <td>0</td>
+    <td>10</td>
   </tr>
   <tr>
     <td>Medium</td>
-    <td>2</td>
+    <td>15</td>
   </tr>
   <tr>
     <td>Hard</td>
-    <td>0</td>
+    <td>1</td>
   </tr>
 </Table>
 
@@ -39,6 +39,13 @@ This Repository contains solution from famous online coding learning platforms l
     <td>shorturl.at/euzO2</td>
   </tr>
   
+  <tr>
+    <td>3</td>
+    <td>30-Day Challenge</td>
+    <td>https://leetcode.com/problemset/30-day-challenge/</td>
+    <td>shorturl.at/bjpDZ</td>
+  </tr>
   
   
 </Table>
+
