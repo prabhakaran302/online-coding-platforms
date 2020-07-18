@@ -3,12 +3,15 @@ package com.practice.july;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Queue;
 import java.util.TreeMap;
+import java.util.stream.Collectors;
 
 import com.practice.easy.util.TreeNode;
 
@@ -66,6 +69,73 @@ public class JulyLeetCoding {
 		head.next.next.child.next.child.next = new Node(12);
 		System.out.println(julyLeetCoding.flatten(head));
 		System.out.println("***************************\n");
+
+		System.out.println(julyLeetCoding.myPow(2, -2));
+		System.out.println("***************************\n");
+
+		nums = new int[] { 1, 2 };
+		System.out.println(Arrays.toString(julyLeetCoding.topKFrequent(nums, 2)));
+		System.out.println("***************************\n");
+	}
+
+	public int[] topKFrequent(int[] nums, int k) {
+		int[] ans = new int[k];
+		Map<Integer, Integer> mp = new HashMap<Integer, Integer>();
+		int n = nums.length;
+		for (int i = 0; i < n; i++) {
+			mp.put(nums[i], mp.getOrDefault(nums[i], 0) + 1);
+		}
+
+		List<List<Integer>> freq = new ArrayList<List<Integer>>();
+		for (int i = 0; i <= n; i++)
+			freq.add(new ArrayList<Integer>());
+
+		for (Map.Entry<Integer, Integer> x : mp.entrySet())
+			freq.get(x.getValue()).add(x.getKey());
+
+		int ind = 0;
+		for (int i = n; i > 0; i--) {
+			if (!freq.get(i).isEmpty()) {
+				for (int j = 0; j < freq.get(i).size(); j++) {
+					ans[ind++] = freq.get(i).get(j);
+				}
+			}
+			if (ind == k)
+				break;
+		}
+		return ans;
+	}
+
+	private Map<Integer, Integer> sortMapByValues(Map<Integer, Integer> map) {
+		Map<Integer, Integer> sortedByCount = map.entrySet().stream()
+				.sorted(Map.Entry.<Integer, Integer>comparingByValue().reversed())
+				.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
+		return sortedByCount;
+	}
+
+	/**
+	 * Implement pow(x, n), which calculates x raised to the power n (xn).
+	 * 
+	 * @param x
+	 * @param y
+	 * @return
+	 */
+	public double myPow(double x, int y) {
+
+		double temp;
+		if (y == 0)
+			return 1;
+		temp = myPow(x, y / 2);
+
+		if (y % 2 == 0)
+			return temp * temp;
+		else {
+			if (y > 0)
+				return x * temp * temp;
+			else
+				return (temp * temp) / x;
+		}
+
 	}
 
 	/**
