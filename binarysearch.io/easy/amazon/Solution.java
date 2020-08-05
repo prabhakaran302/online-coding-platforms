@@ -50,18 +50,25 @@ public class Solution {
 
 	}
 
+	/**
+	 * Remove all elements from a linked list of integers that have value val.
+	 * 
+	 * @param node
+	 * @param target
+	 * @return
+	 */
 	public LLNode solve(LLNode node, int target) {
 		LLNode head = node;
 		while (head != null && head.val == target)
 			head = head.next;
-		
+
 		LLNode current = head;
 		LLNode prev = head;
-		
+
 		while (current != null) {
-			if(current.val == target)	{
+			if (current.val == target) {
 				prev.next = current.next;
-			} else	{
+			} else {
 				prev = current;
 			}
 			current = current.next;

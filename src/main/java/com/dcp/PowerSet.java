@@ -25,7 +25,7 @@ public class PowerSet {
 			result.addAll(newResult);
 		}
 
-		removeDuplicates(result);
+		//removeDuplicates(result);
 
 		System.out.println(result);
 		return result;

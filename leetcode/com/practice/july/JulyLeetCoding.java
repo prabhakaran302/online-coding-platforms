@@ -76,6 +76,54 @@ public class JulyLeetCoding {
 		nums = new int[] { 1, 2 };
 		System.out.println(Arrays.toString(julyLeetCoding.topKFrequent(nums, 2)));
 		System.out.println("***************************\n");
+
+		char[][] board = new char[][] { { 'A', 'B', 'C', 'E' }, { 'S', 'F', 'C', 'S' }, { 'A', 'D', 'E', 'E' } };
+		System.out.println(julyLeetCoding.exist(board, "ABCCED"));
+		System.out.println("***************************\n");
+	}
+
+	/**
+	 * Given a 2D board and a word, find if the word exists in the grid.
+	 * 
+	 * @param board
+	 * @param word
+	 * @return
+	 */
+	public boolean exist(char[][] board, String word) {
+		for (int i = 0; i < board.length; i++) {
+			for (int j = 0; j < board[0].length; j++) {
+				if (board[i][j] == word.charAt(0))
+					if (checkWordUtil(board, word, i, j, 0))
+						return true;
+			}
+		}
+		return false;
+	}
+
+	private boolean checkWordUtil(char[][] board, String word, int i, int j, int level) {
+		int row = board.length;
+		int col = board[0].length;
+
+		if (level == word.length())
+			return true;
+
+		if (i < 0 || j < 0 || i >= row || j >= col)
+			return false;
+
+		if (board[i][j] == word.charAt(level)) {
+
+			char temp = board[i][j];
+			board[i][j] = '#';
+
+			boolean res = checkWordUtil(board, word, i - 1, j, level + 1)
+					|| checkWordUtil(board, word, i + 1, j, level + 1)
+					|| checkWordUtil(board, word, i, j - 1, level + 1)
+					|| checkWordUtil(board, word, i, j + 1, level + 1);
+
+			board[i][j] = temp;
+			return res;
+		} else
+			return false;
 	}
 
 	public int[] topKFrequent(int[] nums, int k) {
