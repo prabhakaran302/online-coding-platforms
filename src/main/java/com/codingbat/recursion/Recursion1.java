@@ -250,7 +250,7 @@ public class Recursion1 {
 	}
 
 	public String allStar(String str) {
-		if (str == null || str.isEmpty() || str.isBlank())
+		if (str == null || str.isEmpty())
 			return str;
 		StringBuilder sb = new StringBuilder();
 		allStar(str, sb, 0);
